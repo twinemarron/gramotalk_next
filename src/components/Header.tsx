@@ -7,13 +7,13 @@ export default async function Header() {
   const session = await auth();
   return (
     <header className="sticky top-0 z-50 w-full">
-      <div className="container px-2 flex justify-between h-14 items-center">
+      <div className="container mx-auto px-2 flex justify-between h-14 items-center">
         <h1 className="font-bold">Gramotalk</h1>
         <MenuDrawer
           button={
             <Avatar>
               <AvatarImage src={session?.user?.image || ""} />
-              <AvatarFallback className="text-slate-900">
+              <AvatarFallback className="font-sans bg-white dark:bg-slate-800 text-slate-900 dark:text-white">
                 <span className="material-symbols-sharp">person</span>
               </AvatarFallback>
             </Avatar>
