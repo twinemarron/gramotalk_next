@@ -46,7 +46,11 @@ export default async function MenuDrawer() {
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            {session ? <SignOutButton /> : <SignInButton className="w-full" />}
+            {session ? (
+              <SignOutButton className="w-full" />
+            ) : (
+              <SignInButton className="w-full" />
+            )}
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>
