@@ -16,6 +16,7 @@ export const users = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  displayName: text("displayName"), // 表示名（追加分）
 });
 
 export const accounts = pgTable(

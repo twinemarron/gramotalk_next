@@ -30,16 +30,23 @@ export default async function MenuDrawer() {
           <DrawerHeader>
             <DrawerTitle>Accounts</DrawerTitle>
             <DrawerDescription className="flex flex-col gap-2">
-              <Link href={"dashboard/settings"}>
+              <DrawerClose asChild>
                 {session ? (
-                  <div className="flex gap-2 items-center">
-                    <UserAvatar src={session?.user?.image || ""} />
-                    <div>{(session && session.user?.email) || ""}</div>
-                  </div>
+                  <Link href={"/dashboard/settings"}>
+                    <div className="flex gap-2 items-center">
+                      <UserAvatar src={session?.user?.image || ""} />
+                      <div>
+                        <div>
+                          {(session && session.user?.displayName) || ""}
+                        </div>
+                        <div>{(session && session.user?.email) || ""}</div>
+                      </div>
+                    </div>
+                  </Link>
                 ) : (
                   <></>
                 )}
-              </Link>
+              </DrawerClose>
               <div className="flex">
                 <ModeToggle />
               </div>

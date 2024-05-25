@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./globalicons.css";
@@ -18,11 +20,19 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+  if (session?.user) {
+    session.user = {
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+    };
+  }
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -38,8 +48,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TRPCReactProvider>
-            <Header />
-            {children}
+            <SessionProvider session={session}>
+              <Header />
+              {children}
+            </SessionProvider>
           </TRPCReactProvider>
         </ThemeProvider>
       </body>
