@@ -1,24 +1,24 @@
 import NextAuth from "next-auth";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { eq } from "drizzle-orm";
+// import { DrizzleAdapter } from "@auth/drizzle-adapter";
+// import { eq } from "drizzle-orm";
 import Google from "next-auth/providers/google";
-import { db } from "@/server/db";
-import {
-  users,
-  accounts,
-  sessions,
-  verificationTokens,
-} from "@/server/db/schema";
+// import { db } from "@/server/db";
+// import {
+//   users,
+//   accounts,
+//   sessions,
+//   verificationTokens,
+// } from "@/server/db/schema";
 
 export const { signIn, signOut, auth, handlers } = NextAuth({
   providers: [Google],
   // users table に追加したカラムを使用するため、第二引数に独自スキーマを渡す
-  adapter: DrizzleAdapter(db, {
-    usersTable: users,
-    accountsTable: accounts,
-    sessionsTable: sessions,
-    verificationTokensTable: verificationTokens,
-  }),
+  // adapter: DrizzleAdapter(db, {
+  //   usersTable: users,
+  //   accountsTable: accounts,
+  //   sessionsTable: sessions,
+  //   verificationTokensTable: verificationTokens,
+  // }),
   // events: {
   //   // 新規ユーザー登録時に displayName を更新する
   //   createUser: async (message) => {
