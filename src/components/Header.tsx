@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import Link from "next/link";
 import MenuDrawer from "@/components/MenuDrawer";
+import { ModeToggle } from "@/components/ModeToggle";
 
 export default async function Header() {
   const session = await auth();
@@ -10,7 +11,10 @@ export default async function Header() {
         <Link href={"/"}>
           <h1 className="font-bold">Gramotalk</h1>
         </Link>
-        <MenuDrawer />
+        <div className="flex align-items-center gap-2">
+          <ModeToggle />
+          <MenuDrawer />
+        </div>
       </div>
     </header>
   );
