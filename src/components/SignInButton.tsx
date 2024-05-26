@@ -6,6 +6,7 @@ export default function SignIn({ className }: { className?: string }) {
     <form
       action={async () => {
         "use server";
+        console.log("log...await signIn()...");
         await signIn();
       }}
     >
