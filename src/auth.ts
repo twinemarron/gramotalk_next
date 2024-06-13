@@ -12,6 +12,12 @@ import {
 
 export const { signIn, signOut, auth, handlers } = NextAuth({
   providers: [Google],
+  // pages: {
+  //   signIn: "/login",
+  // },
+  pages: {
+    signIn: "/signin",
+  },
   // users table に追加したカラムを使用するため、第二引数に独自スキーマを渡す
   adapter: DrizzleAdapter(db, {
     usersTable: users,

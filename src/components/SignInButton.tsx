@@ -7,7 +7,8 @@ export default function SignIn({ className }: { className?: string }) {
       action={async () => {
         "use server";
         console.log("log...await signIn()...");
-        await signIn("google");
+        // await signIn("google");
+        await signIn();
       }}
     >
       <Button type="submit" className={className}>
