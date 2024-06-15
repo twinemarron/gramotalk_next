@@ -11,8 +11,7 @@ import {
 } from "@/server/db/schema";
 
 export const { signIn, signOut, auth, handlers } = NextAuth({
-  // basePath: "/api/auth",
-  providers: [Google({})],
+  providers: [Google],
   // users table に追加したカラムを使用するため、第二引数に独自スキーマを渡す
   adapter: DrizzleAdapter(db, {
     usersTable: users,
