@@ -48,7 +48,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <TRPCReactProvider>
-            <SessionProvider session={session} basePath={"/auth"}>
+            <SessionProvider session={session} basePath={"/api/auth"}>
               <Header />
               {children}
             </SessionProvider>
