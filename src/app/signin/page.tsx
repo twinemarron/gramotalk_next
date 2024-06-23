@@ -1,6 +1,7 @@
 import { providerMap } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { signIn } from "@/auth";
+import Image from "next/image";
 
 export default async function SignInPage() {
   return (
@@ -8,13 +9,15 @@ export default async function SignInPage() {
       {Object.values(providerMap).map((provider) => {
         return (
           <form
+            key={provider.id}
             action={async () => {
               "use server";
               await signIn(provider.id, { redirectTo: "/" });
             }}
           >
             <Button type="submit" className="flex gap-2">
-              <img
+              <Image
+                alt="provider-logo"
                 loading="lazy"
                 height="24"
                 width="24"
