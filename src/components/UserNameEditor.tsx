@@ -8,6 +8,8 @@ import { updateUserName } from "@/app/actions";
 export default function UserNameEditor() {
   const { data: session, update } = useSession();
   const [isEditingName, setIsEditingName] = useState(false);
+  console.log("log...session?.user: ", session?.user);
+  console.log("log...session?.user?.displayName: ", session?.user?.displayName);
 
   return (
     <div className="flex flex-col gap-2">

@@ -51,6 +51,8 @@ export const { signIn, signOut, auth, handlers } = NextAuth({
   },
   callbacks: {
     session({ session, user }) {
+      console.log("log...session: ", session);
+      console.log("log...user: ", user);
       return {
         ...session,
         user: {
