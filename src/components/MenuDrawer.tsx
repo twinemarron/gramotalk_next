@@ -11,10 +11,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import SignInButton from "@/components/SignInButton";
-import SignOutButton from "@/components/SignOutButton";
 import UserAvatar from "@/components/UserAvatar";
-import { auth } from "@/auth";
+import { auth, signOut } from "@/auth";
 
 export default async function MenuDrawer() {
   const session = await auth();
@@ -51,11 +49,24 @@ export default async function MenuDrawer() {
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            {session ? (
-              <SignOutButton className="w-full" />
-            ) : (
-              <SignInButton className="w-full" />
-            )}
+            <DrawerClose asChild>
+              {session ? (
+                <form
+                  action={async () => {
+                    "use server";
+                    await signOut({ redirectTo: "/" });
+                  }}
+                >
+                  <Button type="submit" className="w-full">
+                    Sign Out
+                  </Button>
+                </form>
+              ) : (
+                <Link href={"/signin"}>
+                  <Button className="w-full">Sign In</Button>
+                </Link>
+              )}
+            </DrawerClose>
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>
