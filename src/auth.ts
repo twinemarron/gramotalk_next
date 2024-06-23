@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { Provider } from "next-auth/providers";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { eq } from "drizzle-orm";
 import Google from "next-auth/providers/google";
@@ -10,10 +11,22 @@ import {
   verificationTokens,
 } from "@/server/db/schema";
 
+const providers: Provider[] = [Google];
+
+export const providerMap = providers.map((provider) => {
+  if (typeof provider === "function") {
+    const providerData = provider();
+    return { id: providerData.id, name: providerData.name };
+  } else {
+    return { id: provider.id, name: provider.name };
+  }
+});
+
 export const { signIn, signOut, auth, handlers } = NextAuth({
-  theme: { logo: "https://authjs.dev/img/logo-sm.png" },
-  // basePath: "/auth",
-  providers: [Google],
+  providers,
+  pages: {
+    signIn: "/signin",
+  },
   // users table に追加したカラムを使用するため、第二引数に独自スキーマを渡す
   adapter: DrizzleAdapter(db, {
     usersTable: users,
