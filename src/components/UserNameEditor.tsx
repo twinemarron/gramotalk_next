@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { updateUserName } from "@/app/actions";
 
 export default function UserNameEditor() {
-  const { data: session, update } = useSession();
+  const { data: session, update, status } = useSession();
   const [isEditingName, setIsEditingName] = useState(false);
 
-  useEffect(() => {
-    console.log("log...session: ", session);
-  }, [session]);
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex flex-col gap-2">
