@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,8 +8,10 @@ import { updateUserName } from "@/app/actions";
 export default function UserNameEditor() {
   const { data: session, update } = useSession();
   const [isEditingName, setIsEditingName] = useState(false);
-  console.log("log...session?.user: ", session?.user);
-  console.log("log...session?.user?.displayName: ", session?.user?.displayName);
+
+  useEffect(() => {
+    console.log("log...session: ", session);
+  }, [session]);
 
   return (
     <div className="flex flex-col gap-2">
