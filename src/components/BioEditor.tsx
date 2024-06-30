@@ -4,39 +4,35 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
-import { updateUserName } from "@/app/actions";
+import { updateBio } from "@/app/actions";
 import { FormButton } from "@/components/FormButton";
-import { FormInput } from "@/components/FormInput";
+import { FormTextarea } from "@/components/FormTextarea";
 
-export default function UserNameEditor({
-  session,
-}: {
-  session: Session | null;
-}) {
+export default function BioEditor({ session }: { session: Session | null }) {
   const { update } = useSession();
   const [isEditing, setIsEditing] = useState(false);
   const status = useFormStatus();
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="font-bold">display name</div>
+      <div className="font-bold">bio</div>
       {isEditing ? (
         <form
           action={async (formData) => {
             try {
-              await updateUserName(formData);
+              await updateBio(formData);
               await update();
               setIsEditing(false);
             } catch (error) {
-              console.error("Error in updateUserName:", error);
+              console.error("Error in updateBio:", error);
             }
           }}
           className="flex flex-col gap-2"
         >
-          <FormInput
-            defaultValue={session?.user?.displayName || ""}
-            type="text"
-            name="displayName"
+          <FormTextarea
+            defaultValue={session?.user?.bio || ""}
+            name="bio"
+            rows={10}
           />
           <div className="flex justify-end gap-2">
             <FormButton
@@ -49,9 +45,7 @@ export default function UserNameEditor({
         </form>
       ) : (
         <div>
-          <div className="leading-10 px-3">
-            {session?.user?.displayName || "-"}
-          </div>
+          <div className="px-3 whitespace-pre">{session?.user?.bio || "-"}</div>
           <div className="flex flex-col items-end">
             <Button variant="outline" onClick={() => setIsEditing(true)}>
               Change
