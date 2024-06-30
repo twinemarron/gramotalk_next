@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
+import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { updateUserName } from "@/app/actions";
+import { FormButton } from "@/components/FormButton";
 
 export default function UserNameEditor({
   session,
@@ -13,6 +15,8 @@ export default function UserNameEditor({
 }) {
   const { update } = useSession();
   const [isEditingName, setIsEditingName] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const status = useFormStatus();
 
   return (
     <div className="flex flex-col gap-2">
@@ -20,9 +24,16 @@ export default function UserNameEditor({
       {isEditingName ? (
         <form
           action={async (formData) => {
-            await updateUserName(formData);
-            await update();
-            setIsEditingName(false);
+            try {
+              setIsUpdating(true);
+              await updateUserName(formData);
+              await update();
+              setIsEditingName(false);
+            } catch (error) {
+              console.error("Error in updateUserName:", error);
+            } finally {
+              setIsUpdating(false);
+            }
           }}
           className="flex flex-col gap-2"
         >
@@ -32,10 +43,12 @@ export default function UserNameEditor({
             name="displayName"
           />
           <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setIsEditingName(false)}>
-              Cancel
-            </Button>
-            <Button type="submit">Save</Button>
+            <FormButton
+              label="Cancel"
+              variant="outline"
+              onClick={() => setIsEditingName(false)}
+            />
+            {<FormButton type="submit" label="Save" />}
           </div>
         </form>
       ) : (
