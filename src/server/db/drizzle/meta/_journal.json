@@ -15,6 +15,13 @@
       "when": 1715038484912,
       "tag": "0001_curious_serpent_society",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1719758788096,
+      "tag": "0002_soft_bushwacker",
+      "breakpoints": true
     }
   ]
 }
