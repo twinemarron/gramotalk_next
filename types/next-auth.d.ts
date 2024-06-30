@@ -6,5 +6,6 @@ declare module "next-auth" {
   }
   interface User {
     displayName?: string;
+    bio?: string;
   }
 }

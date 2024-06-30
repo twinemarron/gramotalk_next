@@ -1,6 +1,7 @@
 import UserAvatar from "@/components/UserAvatar";
 import { Button } from "@/components/ui/button";
 import UserNameEditor from "@/components/UserNameEditor";
+import BioEditor from "@/components/BioEditor";
 import { auth } from "@/auth";
 
 export default async function SettingsPage() {
@@ -16,13 +17,7 @@ export default async function SettingsPage() {
         <Button variant="outline">Change image</Button>
       </div>
       <UserNameEditor session={session} />
-      <div className="flex flex-col gap-2">
-        <div className="font-bold">bio</div>
-        <div className="">bio texts...</div>
-        <div className="flex flex-col items-end">
-          <Button variant="outline">Change</Button>
-        </div>
-      </div>
+      <BioEditor session={session} />
     </div>
   );
 }
