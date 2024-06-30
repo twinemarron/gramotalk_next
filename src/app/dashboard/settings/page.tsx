@@ -15,7 +15,7 @@ export default async function SettingsPage() {
         />
         <Button variant="outline">Change image</Button>
       </div>
-      <UserNameEditor />
+      <UserNameEditor session={session} />
       <div className="flex flex-col gap-2">
         <div className="font-bold">bio</div>
         <div className="">bio texts...</div>
