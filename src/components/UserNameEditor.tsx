@@ -1,12 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { updateUserName } from "@/app/actions";
 import { FormButton } from "@/components/FormButton";
+import { FormInput } from "@/components/FormInput";
 
 export default function UserNameEditor({
   session,
@@ -37,7 +37,7 @@ export default function UserNameEditor({
           }}
           className="flex flex-col gap-2"
         >
-          <Input
+          <FormInput
             defaultValue={session?.user?.displayName || ""}
             type="text"
             name="displayName"
