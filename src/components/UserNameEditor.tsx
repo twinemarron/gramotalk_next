@@ -44,7 +44,7 @@ export default function UserNameEditor({
               variant="outline"
               onClick={() => setIsEditing(false)}
             />
-            {<FormButton type="submit" label="Save" />}
+            <FormButton type="submit" label="Save" />
           </div>
         </form>
       ) : (

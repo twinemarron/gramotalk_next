@@ -8,6 +8,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,6 +55,7 @@ export default async function RootLayout({
             </SessionProvider>
           </TRPCReactProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
